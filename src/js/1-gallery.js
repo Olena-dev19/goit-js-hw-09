@@ -112,7 +112,6 @@ gallery.on('show.simplelightbox', function () {
     if (largeImage) {
         openModal(largeImage);
     }
-	console.log('Hello');
     
 });
 
