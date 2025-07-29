@@ -94,25 +94,17 @@ function imagesTemplate(items) {
     return items.map(imageTemplate).join('')
 }
 const markup = imagesTemplate(images);
-console.log(markup
-);
-
 
 ulElems.insertAdjacentHTML('beforeend', markup);
 
 
-    let gallery = new SimpleLightbox('.gallery a');
-gallery.on('show.simplelightbox', function () {
-    if (e.target.nodeName !== 'IMG') {
-                return;
-            } 
-            const clickedImg = e.target;
-            const largeImage = clickedImg.dataset.source;
-        
-    if (largeImage) {
-        openModal(largeImage);
-    }
-    
+let gallery = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
 });
+  
+gallery.on('show.simplelightbox');
+
+
 
 
