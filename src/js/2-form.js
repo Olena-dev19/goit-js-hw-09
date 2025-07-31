@@ -64,4 +64,4 @@ function saveToLS(key, value) {
     } catch {
       return defaultValue || jsonData;
     }
-  }
+};
