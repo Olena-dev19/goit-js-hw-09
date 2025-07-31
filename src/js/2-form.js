@@ -6,6 +6,18 @@ let formData = {
 const formEl = document.querySelector('.feedback-form');
 
 
+document.addEventListener('DOMContentLoaded', () => {
+  let lsData = getFromLS('feedback-form-state');
+  try {
+      formData = lsData || {};
+      formEl.elements.email.value = lsData.email;
+      formEl.elements.message.value = lsData.message;
+  } catch {
+  }
+  
+});
+
+
 formEl.addEventListener('input', (e) => {
     const email = e.currentTarget.elements.email.value;
     const message = e.currentTarget.elements.message.value;
@@ -17,16 +29,7 @@ formEl.addEventListener('input', (e) => {
 });
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    let lsData = getFromLS('feedback-form-state');
-    try {
-        // formData = lsData;
-        formEl.elements.email.value = lsData.email;
-        formEl.elements.message.value = lsData.message;
-    } catch {
-    }
-    
-});
+
 
 
 
@@ -37,6 +40,9 @@ formEl.addEventListener('submit', (e) => {
     if (email == '' || message == '') {
         alert('Fill please all fields');
         return;
+    } else {
+      console.log(formData);
+      
     }
     localStorage.removeItem('feedback-form-state');
     formEl.reset();
