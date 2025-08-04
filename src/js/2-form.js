@@ -8,11 +8,13 @@ const formEl = document.querySelector('.feedback-form');
 
 document.addEventListener('DOMContentLoaded', () => {
   let lsData = getFromLS('feedback-form-state');
-  try {
-      formData = lsData || {};
-      formEl.elements.email.value = lsData.email;
-      formEl.elements.message.value = lsData.message;
-  } catch {
+  if (lsData) {
+    formData.email = typeof lsData.email === 'string' ? lsData.email : '';
+    formData.message = typeof lsData.message === 'string' ? lsData.message : '';
+
+    formEl.elements.email.value = formData.email;
+    formEl.elements.message.value = formData.message;
+  
   }
   
 });
@@ -31,23 +33,22 @@ formEl.addEventListener('input', (e) => {
 
 
 
-
-
 formEl.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = e.currentTarget.elements.email.value;
-    const message = e.currentTarget.elements.message.value;
+  e.preventDefault(); 
+
+    const email = e.currentTarget.elements.email.value.trim();
+    const message = e.currentTarget.elements.message.value.trim();
     if (email == '' || message == '') {
         alert('Fill please all fields');
         return;
-    } else {
-      console.log(formData);
-      
-    }
+  } 
+  console.log({ email, message});
+  
     localStorage.removeItem('feedback-form-state');
     formEl.reset();
     formData = { email: '', message: '', };
 })
+
 
 
 
