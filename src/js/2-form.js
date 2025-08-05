@@ -42,7 +42,9 @@ formEl.addEventListener('submit', (e) => {
         alert('Fill please all fields');
         return;
   } 
-  console.log({ email, message});
+    formData.email = email;
+    formData.message = message;
+    console.log(formData);
   
     localStorage.removeItem('feedback-form-state');
     formEl.reset();
